@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+header{
+    width: 100%;
+}
+
+.wrapper {
+    background-color: #2d4e5a;
+    height: 200px;
+    width: 200px;
+    position: relative;
+  }
