@@ -108,7 +108,6 @@ function GetAndShow() {
           gauge4.set(data.tds);
           gauge5.set(data.ph);
           fm.setPercentage(data.wl);
-          setFlow(data.wf);
           setPc(data.pc);
       })
       .catch(error => {

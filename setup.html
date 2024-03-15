@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi-Slide Form</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  .container {
+    width: 80%;
+    margin: 50px auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .question {
+    display: none;
+  }
+  .question.active {
+    display: block;
+  }
+  .button-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="question active" id="question1">
+    <h2>Question 1</h2>
+    <p>What is your name?</p>
+    <input type="text" id="name">
+    <div class="button-container">
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+  </div>
+  <div class="question" id="question2">
+    <h2>Question 2</h2>
+    <p>What is your email?</p>
+    <input type="email" id="email">
+    <div class="button-container">
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+  </div>
+  <div class="question" id="question3">
+    <h2>Question 3</h2>
+    <p>What is your age?</p>
+    <input type="number" id="age">
+    <div class="button-container">
+      <button onclick="submitForm()">Submit</button>
+    </div>
+  </div>
+</div>
+<script>
+  let currentQuestion = 1;
+
+  function nextQuestion() {
+    const current = document.getElementById('question' + currentQuestion);
+    current.classList.remove('active');
+    currentQuestion++;
+    const next = document.getElementById('question' + currentQuestion);
+    next.classList.add('active');
+  }
+
+  function submitForm() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const age = document.getElementById('age').value;
+
+    // Here, you can perform any validation or send the data to a server
+    // For now, let's just log the data
+    console.log('Name:', name);
+    console.log('Email:', email);
+    console.log('Age:', age);
+
+    // Redirect to the index page
+    window.location.href = 'index.html'; // Change 'index.html' to your actual index page
+  }
+</script>
+</body>
+</html>
