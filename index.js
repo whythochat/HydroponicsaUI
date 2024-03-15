@@ -25,6 +25,21 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
   createWindow();
-  parser.on('data', console.log(data))
+  var receivedData = ''
+  port.on('data', data => {
+    // Convert buffer data to string
+    var strData = data.toString();
+    // Concatenate the string data
+    receivedData += strData;
+    // Check if you received a complete message
+    if (receivedData.endsWith('END')) {
+        // Process the complete message
+        console.log('Received message:', receivedData);
+        // Clear the buffer for the next message
+        receivedData = '';
+        send()
+    }
+  });
+
 });
 
