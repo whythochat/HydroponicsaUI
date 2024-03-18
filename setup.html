@@ -3,94 +3,171 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multi-Slide Form</title>
+<title>Setup Form</title>
 <style>
   body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
   }
-  .container {
-    width: 80%;
-    margin: 50px auto;
-    border: 1px solid #ccc;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  .carousel {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
   }
   .question {
-    display: none;
+    margin-top: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
   }
-  .question.active {
-    display: block;
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
   }
-  .button-container {
-    text-align: center;
+  .progress-bar {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 5px;
     margin-top: 20px;
   }
-  .button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+  .progress-bar-fill {
+    height: 20px;
+    background-color: #4caf50;
     border-radius: 5px;
+    transition: width 0.5s ease-in-out;
+  }
+  .number-pad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+  }
+  .key {
+    padding: 15px;
+    text-align: center;
+    font-size: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
   }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="question active" id="question1">
-    <h2>Question 1</h2>
-    <p>What is your name?</p>
-    <input type="text" id="name">
-    <div class="button-container">
-      <button onclick="nextQuestion()">Next</button>
-    </div>
+<div class="carousel">
+  <div class="question" id="question1">
+    <h2>Let's get started</h2>
+    <p>Click next to progress the set up</p>
+    <button onclick="nextQuestion()">Next</button>
   </div>
   <div class="question" id="question2">
-    <h2>Question 2</h2>
-    <p>What is your email?</p>
-    <input type="email" id="email">
-    <div class="button-container">
-      <button onclick="nextQuestion()">Next</button>
-    </div>
+    <h2>What is your tank capacity?</h2>
+    <p><input type="text" id="tank-capacity"></p>
+    <button onclick="nextQuestion2()">Next</button>
   </div>
   <div class="question" id="question3">
+    <h2>Fill up the tank</h2>
+    <p>Tank level:
+      <div class="progress-bar">
+        <div class="progress-bar-fill" id="progress-bar-fill"></div>
+      </div>
+    </p>
+    <button onclick="nextQuestion()">Next</button>
+  </div>
+  <div class="question" id="question4">
     <h2>Question 3</h2>
-    <p>What is your age?</p>
-    <input type="number" id="age">
-    <div class="button-container">
-      <button onclick="submitForm()">Submit</button>
-    </div>
+    <p>This is the third question.</p>
+    <button onclick="submitForm()">Submit</button>
   </div>
 </div>
+
+<div class="number-pad">
+  <div data-value="1" class="key">1</div>
+  <div data-value="2" class="key">2</div>
+  <div data-value="3" class="key">3</div>
+  <div data-value="4" class="key">4</div>
+  <div data-value="5" class="key">5</div>
+  <div data-value="6" class="key">6</div>
+  <div data-value="7" class="key">7</div>
+  <div data-value="8" class="key">8</div>
+  <div data-value="9" class="key">9</div>
+  <div data-value="0" class="key">0</div>
+  <div data-value="-1" class="key">⌫</div>
+</div>
+
+<script>
+  const inputBox = document.getElementById('tank-capacity');
+  const keys = document.querySelectorAll('.key');
+
+  keys.forEach(key => {
+    key.addEventListener('click', () => {
+      if (key.getAttribute('data-value') === '-1') {
+        inputBox.value = inputBox.value.slice(0, -1);
+      }
+      else{
+      const keyValue = key.getAttribute('data-value');
+      inputBox.value += keyValue;
+    }
+    });
+  });
+</script>
+
 <script>
   let currentQuestion = 1;
+  const questions = document.querySelectorAll('.question');
+
+  function updateProgressBar() {
+    progressBarFill.style.width = (currentQuestion / questions.length) * 100 + '%';
+    if (currentQuestion === questions.length) {
+      // Trigger the next action when progress bar reaches full
+      setTimeout(() => {
+        submitForm(); // For demo purposes, submitting the form when progress bar is full
+      }, 500);
+    }
+  }
+
+  function showQuestion(questionNumber) {
+    questions.forEach((question, index) => {
+      if (index === questionNumber - 1) {
+        question.style.display = 'block';
+        setTimeout(() => {
+          question.style.opacity = '1';
+          question.style.transform = 'translateX(0)';
+        }, 10); // Adding a small delay to ensure the slide effect works properly
+      } else {
+        setTimeout(() => {
+          question.style.opacity = '0';
+          question.style.transform = 'translateX(-100%)';
+          setTimeout(() => {
+            question.style.display = 'none';
+          }, 500); // Hiding after animation is complete
+        }, 0); // No delay for hiding other questions
+      }
+    });
+  }
 
   function nextQuestion() {
-    const current = document.getElementById('question' + currentQuestion);
-    current.classList.remove('active');
-    currentQuestion++;
-    const next = document.getElementById('question' + currentQuestion);
-    next.classList.add('active');
+    if (currentQuestion < questions.length) {
+      currentQuestion++;
+      showQuestion(currentQuestion);
+    }
   }
 
   function submitForm() {
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const age = document.getElementById('age').value;
-
-    // Here, you can perform any validation or send the data to a server
-    // For now, let's just log the data
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Age:', age);
-
-    // Redirect to the index page
-    window.location.href = 'index.html'; // Change 'index.html' to your actual index page
+    // Here you can collect and handle form data
+    window.location.href="index.html";
   }
+
+  // Show the first question initially
+  showQuestion(currentQuestion);
 </script>
 </body>
 </html>
