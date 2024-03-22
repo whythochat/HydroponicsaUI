@@ -102,13 +102,13 @@ function GetAndShow() {
   fetch('./info.json')
       .then(response => response.json())
       .then(data => {
-          gauge1.set(data.temp);
-          gauge2.set(data.hum);
-          gauge3.set(data.wt);
-          gauge4.set(data.tds);
-          gauge5.set(data.ph);
+          gauge1.set(data.ETc);
+          gauge2.set(data.H);
+          gauge3.set(data.WTc);
+          gauge4.set(data.TDS);
+          gauge5.set(data.pH);
           fm.setPercentage(data.wl);
-          setPc(data.pc);
+          setPc(data.P);
       })
       .catch(error => {
           console.error('Error fetching data:', error);

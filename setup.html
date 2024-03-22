@@ -4,62 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Setup Form</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  .carousel {
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  .question {
-    margin-top: 20px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-  }
-  button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  .progress-bar {
-    width: 100%;
-    background-color: #ddd;
-    border-radius: 5px;
-    margin-top: 20px;
-  }
-  .progress-bar-fill {
-    height: 20px;
-    background-color: #4caf50;
-    border-radius: 5px;
-    transition: width 0.5s ease-in-out;
-  }
-  .number-pad {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-    width: 200px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f0f0f0;
-  }
-  .key {
-    padding: 15px;
-    text-align: center;
-    font-size: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-</style>
+<link rel="stylesheet" href="./setup.css">
 </head>
 <body>
 <div class="carousel">
@@ -69,105 +14,106 @@
     <button onclick="nextQuestion()">Next</button>
   </div>
   <div class="question" id="question2">
-    <h2>What is your tank capacity?</h2>
-    <p><input type="text" id="tank-capacity"></p>
-    <button onclick="nextQuestion2()">Next</button>
-  </div>
-  <div class="question" id="question3">
-    <h2>Fill up the tank</h2>
-    <p>Tank level:
-      <div class="progress-bar">
-        <div class="progress-bar-fill" id="progress-bar-fill"></div>
-      </div>
-    </p>
+    <h2>How high is the water when the tank is full(cm)?</h2>
+    <p><input placeholder="Centimeters" type="text" id="tank-capacity"></p>
+    <div class="number-pad">
+      <div data-value="1" class="key">1</div>
+      <div data-value="2" class="key">2</div>
+      <div data-value="3" class="key">3</div>
+      <div data-value="4" class="key">4</div>
+      <div data-value="5" class="key">5</div>
+      <div data-value="6" class="key">6</div>
+      <div data-value="7" class="key">7</div>
+      <div data-value="8" class="key">8</div>
+      <div data-value="9" class="key">9</div>
+      <div data-value="0" class="key">0</div>
+      <div data-value="-1" class="key">⌫</div>
+    </div>
     <button onclick="nextQuestion()">Next</button>
   </div>
-  <div class="question" id="question4">
-    <h2>Question 3</h2>
-    <p>This is the third question.</p>
-    <button onclick="submitForm()">Submit</button>
+  <div class="question" id="question5">
+    <h2>Water Pump Cycle</h2>
+    <p>How many minutes an hour would you like the pump to run?<br>(Seperate with a /)</p>
+    
+    <input placeholder="hours/hours" type="text" id="water-pump-cycle" class="input-box" >
+    <div class="number-pad">
+      <div data-value="1" class="key2">1</div>
+      <div data-value="2" class="key2">2</div>
+      <div data-value="3" class="key2">3</div>
+      <div data-value="4" class="key2">4</div>
+      <div data-value="5" class="key2">5</div>
+      <div data-value="6" class="key2">6</div>
+      <div data-value="7" class="key2">7</div>
+      <div data-value="8" class="key2">8</div>
+      <div data-value="9" class="key2">9</div>
+      <div data-value="0" class="key2">0</div>
+      <div data-value="/" class="key2">/</div>
+      <div data-value="-1" class="key2">⌫</div>
+    </div>
+    <button onclick="nextQuestion()">Next</button>
+  </div>
+  <div class="question" id="question6">
+    <h2>Lights</h2>
+    <p>What kind of lighting is available?</p>
+    <form id="lights">
+      <input type="radio" name="option" id="artificial" value="artificial"><label for="artificial">Artificial</label><br> 
+      <input type="radio" name="option" id="natural" value="natural"><label for="natural">Natural</label><br>
+    </form>
+    <button onclick="nextQuestion()">Next</button>
+  </div>
+  <div class="question" id="question7">
+    <h2>Lights</h2>
+    <p>What period of time do you want the lights to be on(Not applicable if you chose natural)?</p>
+    <form id="lightstime">
+      <label for="timefrom">From</label><input type="time" id="timefrom"><br> 
+      <label for="timeto">To</label><input type="time" id="timeto"><br>
+    </form>
+    <button onclick="nextQuestion()">Next</button>
+  </div>
+  <div class="question" id="question8">
+    <h2>Calibration</h2>
+    <p>Make sure all the requirements are ready for calibration to start.</p>
+    <form id="req">
+      <input class="checks" type="checkbox" id="checkbox1" onclick="checkButton()"> <label for="checkbox1">A, B, N<sub>A</sub>, N<sub>B</sub> is filled</label><br>
+      <input class="checks" type="checkbox" id="checkbox2" onclick="checkButton()"> <label for="checkbox2">Lights and motors plugged in</label><br>
+      <input class="checks" type="checkbox" id="checkbox3" onclick="checkButton()"> <label for="checkbox3">Tank filled with RO water</label><br>
+      <input class="checks" type="checkbox" id="checkbox4" onclick="checkButton()"> <label for="checkbox4">Seedling period satisfied</label><br>
+      <input class="checks" type="checkbox" id="checkbox5" onclick="checkButton()"> <label for="checkbox5">Overall requirements</label><br>
+    </form>
+    <button id="reqb" onclick="nextQuestion(); updateph()" disabled>Start</button>
+  </div>
+  <div class="question" id="question9">
+    <h2>Calibration</h2>
+    <p>Calibrating pH wait a moment</p>
+    <div id="phval">5.5</div><div id="loading-icon" class="loader"></div>
+    <div id="tick-mark">&#10004;</div>
+    <button id="phch" onclick="nextQuestion(); updatetds()" disabled>Next</button>
+  </div>
+  <div class="question" id="question10">
+    <h2>Calibration</h2>
+    <p>The TDS value (ideally, this should be between 60 and 100 ppm before adding the solutions)</p>
+    <div id="tdsval">60</div>
+    <button onclick="nextQuestion();tdschk()">Next</button>
+  </div>
+  <div class="question" id="question11">
+    <h2>Calibration</h2>
+    <p>Calibrating TDS wait a moment</p>
+    <div id="tdsval2">350 ppm</div><div id="loading-icon2" class="loader"></div>
+    <div id="tick-mark2">&#10004;</div>
+    <button id="tdsch" onclick="nextQuestion()" disabled>Next</button>
+  </div>
+  <div class="question" id="question12">
+    <h2>Last Step</h2>
+    <p>Check if these are okay</p>
+    <ul>
+      <li>Check if the lights are installed properly</li>
+      <li>Check the pump</li>
+      <li>Verify pH</li>
+      <li>Verify TDS</li>
+    </ul>
+    <button onclick="finish()">Done</button>
   </div>
 </div>
-
-<div class="number-pad">
-  <div data-value="1" class="key">1</div>
-  <div data-value="2" class="key">2</div>
-  <div data-value="3" class="key">3</div>
-  <div data-value="4" class="key">4</div>
-  <div data-value="5" class="key">5</div>
-  <div data-value="6" class="key">6</div>
-  <div data-value="7" class="key">7</div>
-  <div data-value="8" class="key">8</div>
-  <div data-value="9" class="key">9</div>
-  <div data-value="0" class="key">0</div>
-  <div data-value="-1" class="key">⌫</div>
-</div>
-
-<script>
-  const inputBox = document.getElementById('tank-capacity');
-  const keys = document.querySelectorAll('.key');
-
-  keys.forEach(key => {
-    key.addEventListener('click', () => {
-      if (key.getAttribute('data-value') === '-1') {
-        inputBox.value = inputBox.value.slice(0, -1);
-      }
-      else{
-      const keyValue = key.getAttribute('data-value');
-      inputBox.value += keyValue;
-    }
-    });
-  });
-</script>
-
-<script>
-  let currentQuestion = 1;
-  const questions = document.querySelectorAll('.question');
-
-  function updateProgressBar() {
-    progressBarFill.style.width = (currentQuestion / questions.length) * 100 + '%';
-    if (currentQuestion === questions.length) {
-      // Trigger the next action when progress bar reaches full
-      setTimeout(() => {
-        submitForm(); // For demo purposes, submitting the form when progress bar is full
-      }, 500);
-    }
-  }
-
-  function showQuestion(questionNumber) {
-    questions.forEach((question, index) => {
-      if (index === questionNumber - 1) {
-        question.style.display = 'block';
-        setTimeout(() => {
-          question.style.opacity = '1';
-          question.style.transform = 'translateX(0)';
-        }, 10); // Adding a small delay to ensure the slide effect works properly
-      } else {
-        setTimeout(() => {
-          question.style.opacity = '0';
-          question.style.transform = 'translateX(-100%)';
-          setTimeout(() => {
-            question.style.display = 'none';
-          }, 500); // Hiding after animation is complete
-        }, 0); // No delay for hiding other questions
-      }
-    });
-  }
-
-  function nextQuestion() {
-    if (currentQuestion < questions.length) {
-      currentQuestion++;
-      showQuestion(currentQuestion);
-    }
-  }
-
-  function submitForm() {
-    // Here you can collect and handle form data
-    window.location.href="index.html";
-  }
-
-  // Show the first question initially
-  showQuestion(currentQuestion);
-</script>
+<script type="text/javascript" src="./setup.js"></script>
 </body>
 </html>
