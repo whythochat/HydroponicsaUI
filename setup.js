@@ -112,6 +112,13 @@ function nextQuestion() {
   }
 }
 
+function skipQuestion(){
+  if (currentQuestion < questions.length) {
+    currentQuestion+=2;
+    showQuestion(currentQuestion);
+  }
+}
+
 function updateph(){ 
     setTimeout( () => {
     var newValue = 6 //Math.round(Math.random() * 14 * 10) / 10;

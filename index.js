@@ -54,14 +54,15 @@ const createWindow = () => {
       }
     }
   })
-  
-  const readpy = spawner('python', ['rec.py', 'Hello']); 
-  readpy.stdout.on();  
-  console.log("Works even when on loop")
+
 }
 
 app.whenReady().then(() => {
-  createWindow()
+  createWindow();
+  const pythonprocess = spawner('python', ['rec.py']);
+  pythonprocess.stdout.on('data', (data) => {
+    console.log('From python: ' + data)
+  })
 });
 
 

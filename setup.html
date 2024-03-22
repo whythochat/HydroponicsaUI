@@ -59,7 +59,14 @@
       <input type="radio" name="option" id="artificial" value="artificial"><label for="artificial">Artificial</label><br> 
       <input type="radio" name="option" id="natural" value="natural"><label for="natural">Natural</label><br>
     </form>
-    <button onclick="nextQuestion()">Next</button>
+    <button onclick="    
+    if(typeOfLights == 'artificial'){
+      nextQuestion();
+    }
+    else{
+      skipQuestion();
+    }
+    ">Next</button>
   </div>
   <div class="question" id="question7">
     <h2>Lights</h2>
@@ -74,11 +81,13 @@
     <h2>Calibration</h2>
     <p>Make sure all the requirements are ready for calibration to start.</p>
     <form id="req">
-      <input class="checks" type="checkbox" id="checkbox1" onclick="checkButton()"> <label for="checkbox1">A, B, N<sub>A</sub>, N<sub>B</sub> is filled</label><br>
-      <input class="checks" type="checkbox" id="checkbox2" onclick="checkButton()"> <label for="checkbox2">Lights and motors plugged in</label><br>
-      <input class="checks" type="checkbox" id="checkbox3" onclick="checkButton()"> <label for="checkbox3">Tank filled with RO water</label><br>
-      <input class="checks" type="checkbox" id="checkbox4" onclick="checkButton()"> <label for="checkbox4">Seedling period satisfied</label><br>
-      <input class="checks" type="checkbox" id="checkbox5" onclick="checkButton()"> <label for="checkbox5">Overall requirements</label><br>
+      <ul class="list">
+      <li><input class="checks" type="checkbox" id="checkbox1" onclick="checkButton()"> <label for="checkbox1">A, B, N<sub>A</sub>, N<sub>B</sub> is filled</label><br></li>
+      <li><input class="checks" type="checkbox" id="checkbox2" onclick="checkButton()"> <label for="checkbox2">Lights and motors plugged in</label><br></li>
+      <li><input class="checks" type="checkbox" id="checkbox3" onclick="checkButton()"> <label for="checkbox3">Tank filled with RO water</label><br></li>
+      <li><input class="checks" type="checkbox" id="checkbox4" onclick="checkButton()"> <label for="checkbox4">Seedling period satisfied</label><br></li>
+      <li><input class="checks" type="checkbox" id="checkbox5" onclick="checkButton()"> <label for="checkbox5">Overall requirements</label><br></li>
+      </ul>
     </form>
     <button id="reqb" onclick="nextQuestion(); updateph()" disabled>Start</button>
   </div>
