@@ -3,21 +3,34 @@ var typeOfLights = '';
 var waterPumpCycle = 0;
 var timing = 0;
 
-const inputBox = document.getElementById('tank-capacity');
-const waterBox = document.getElementById('water-pump-cycle');
+const tankh = document.getElementById('tank-capacity');
+const pumpCycle = document.getElementById('water-pump-cycle');
+const tankl = document.getElementById('tank-litres');
 const keys = document.querySelectorAll('.key');
 const keys2 = document.querySelectorAll('.key2');
+const keys3 = document.querySelectorAll('.key3');
 
 keys.forEach(key => {
   key.addEventListener('click', () => {
     if (key.getAttribute('data-value') === '-1') {
-      inputBox.value = inputBox.value.slice(0, -1);
+      tankh.value = tankh.value.slice(0, -1);
     }
     else{
     const keyValue = key.getAttribute('data-value');
-    inputBox.value += keyValue;
+    tankh.value += keyValue;
   }
-  //updateProgressBar(30)
+  });
+});
+
+keys3.forEach(key => {
+  key.addEventListener('click', () => {
+    if (key.getAttribute('data-value') === '-1') {
+      tankl.value = tankl.value.slice(0, -1);
+    }
+    else{
+    const keyValue = key.getAttribute('data-value');
+    tankl.value += keyValue;
+  }
   });
 });
 
@@ -52,11 +65,11 @@ function updateValues() {
 keys2.forEach(key => {
   key.addEventListener('click', () => {
     if (key.getAttribute('data-value') === '-1') {
-      waterBox.value = waterBox.value.slice(0, -1);
+      pumpCycle.value = pumpCycle.value.slice(0, -1);
     }
     else{
     const keyValue = key.getAttribute('data-value');
-    waterBox.value += keyValue;
+    pumpCycle.value += keyValue;
   }
   updateValues();
   });

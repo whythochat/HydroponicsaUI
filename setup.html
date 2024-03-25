@@ -15,6 +15,24 @@
   </div>
   <div class="question" id="question2">
     <h2>How high is the water when the tank is full(cm)?</h2>
+    <p><input placeholder="Centimeters" type="text" id="tank-litres"></p>
+    <div class="number-pad">
+      <div data-value="1" class="key3">1</div>
+      <div data-value="2" class="key3">2</div>
+      <div data-value="3" class="key3">3</div>
+      <div data-value="4" class="key3">4</div>
+      <div data-value="5" class="key3">5</div>
+      <div data-value="6" class="key3">6</div>
+      <div data-value="7" class="key3">7</div>
+      <div data-value="8" class="key3">8</div>
+      <div data-value="9" class="key3">9</div>
+      <div data-value="0" class="key3">0</div>
+      <div data-value="-1" class="key3">⌫</div>
+    </div>
+    <button onclick="nextQuestion()">Next</button>
+  </div>
+  <div class="question" id="question3">
+    <h2>How high is the water when the tank is full(cm)?</h2>
     <p><input placeholder="Centimeters" type="text" id="tank-capacity"></p>
     <div class="number-pad">
       <div data-value="1" class="key">1</div>
@@ -31,7 +49,7 @@
     </div>
     <button onclick="nextQuestion()">Next</button>
   </div>
-  <div class="question" id="question5">
+  <div class="question" id="question4">
     <h2>Water Pump Cycle</h2>
     <p>How many minutes an hour would you like the pump to run?<br>(Seperate with a /)</p>
     
@@ -52,7 +70,7 @@
     </div>
     <button onclick="nextQuestion()">Next</button>
   </div>
-  <div class="question" id="question6">
+  <div class="question" id="question5">
     <h2>Lights</h2>
     <p>What kind of lighting is available?</p>
     <form id="lights">
@@ -68,7 +86,7 @@
     }
     ">Next</button>
   </div>
-  <div class="question" id="question7">
+  <div class="question" id="question6">
     <h2>Lights</h2>
     <p>What period of time do you want the lights to be on(Not applicable if you chose natural)?</p>
     <form id="lightstime">
@@ -77,7 +95,7 @@
     </form>
     <button onclick="nextQuestion()">Next</button>
   </div>
-  <div class="question" id="question8">
+  <div class="question" id="question7">
     <h2>Calibration</h2>
     <p>Make sure all the requirements are ready for calibration to start.</p>
     <form id="req">
@@ -91,27 +109,27 @@
     </form>
     <button id="reqb" onclick="nextQuestion(); updateph()" disabled>Start</button>
   </div>
-  <div class="question" id="question9">
+  <div class="question" id="question8">
     <h2>Calibration</h2>
     <p>Calibrating pH wait a moment</p>
     <div id="phval">5.5</div><div id="loading-icon" class="loader"></div>
     <div id="tick-mark">&#10004;</div>
     <button id="phch" onclick="nextQuestion(); updatetds()" disabled>Next</button>
   </div>
-  <div class="question" id="question10">
+  <div class="question" id="question9">
     <h2>Calibration</h2>
     <p>The TDS value (ideally, this should be between 60 and 100 ppm before adding the solutions)</p>
     <div id="tdsval">60</div>
     <button onclick="nextQuestion();tdschk()">Next</button>
   </div>
-  <div class="question" id="question11">
+  <div class="question" id="question10">
     <h2>Calibration</h2>
     <p>Calibrating TDS wait a moment</p>
     <div id="tdsval2">350 ppm</div><div id="loading-icon2" class="loader"></div>
     <div id="tick-mark2">&#10004;</div>
     <button id="tdsch" onclick="nextQuestion()" disabled>Next</button>
   </div>
-  <div class="question" id="question12">
+  <div class="question" id="question11">
     <h2>Last Step</h2>
     <p>Check if these are okay</p>
     <ul>

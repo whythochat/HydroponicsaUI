@@ -57,6 +57,12 @@ gauge5.maxValue = 60; // set max gauge value
 gauge5.setMinValue(0); // Prefer setter over gauge.minValue = 0
 gauge5.animationSpeed = 60;
 
+var target6 = document.getElementById('co2'); // your canvas element
+var gauge6 = new Gauge(target6).setOptions(opts); // create sexy gauge!
+gauge6.maxValue = 60; // set max gauge value
+gauge6.setMinValue(0); // Prefer setter over gauge.minValue = 0
+gauge6.animationSpeed = 60;
+
 var fm = new FluidMeter();
 fm.init({
   targetContainer: document.getElementById("fluid-meter"),
@@ -96,7 +102,11 @@ function setFlow(value) {
 
 function setPc(value) {
     document.getElementById('pc').innerHTML=value+" W/h";
-  }   
+}   
+
+function impUpdates() {
+  
+}
 
 function GetAndShow() {
   fetch('./info.json')
@@ -107,8 +117,10 @@ function GetAndShow() {
           gauge3.set(data.WTc);
           gauge4.set(data.TDS);
           gauge5.set(data.pH);
+          gauge6.set(data.CO2);
           fm.setPercentage(data.wl);
           setPc(data.P);
+          impUpdates();
       })
       .catch(error => {
           console.error('Error fetching data:', error);
