@@ -1,6 +1,7 @@
 var capacity = 0;
 var typeOfLights = '';
-var waterPumpCycle = 0;
+var pumpHour1 = 0;
+var pumpHour2 = 0;
 var timing = 0;
 var lighton= 0;
 var lightoff = 0; 
@@ -58,9 +59,8 @@ function updateValues() {
   var input = document.getElementById('water-pump-cycle').value;
   timing = input.split('/');
   if (timing.length === 2) {
-    // Do something with the values (values[0] and values[1])
-    console.log("First value: " + timing[0]);
-    console.log("Second value: " + timing[1]);
+    pumpHour1=timing[0]
+    pumpHour2=timing[1]
   }
 }
 
@@ -183,12 +183,13 @@ function updatetds(){
 function submitForm() {
   lighton = document.getElementById("timefrom").value;
   lightoff = document.getElementById("timeto").value;
+  waterlevel = document.getElementById('tank-capacity').value;
   window.electronAPI.writejson(
     {
       "status": 0,
-      "wl":24,
+      "wl":waterlevel,
       "ltime":[lighton, lightoff],
-      "mtime":[[1,4],[5,8],]
+      "mtime":[pumpHour1,pumpHour2]
   }
   );
 }
