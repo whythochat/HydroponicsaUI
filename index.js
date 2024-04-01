@@ -24,8 +24,7 @@ const createWindow = () => {
 
     //fullscreen: true,
     autoHideMenuBar: true,
-    width: 800,
-    height: 480,
+    fullscreen: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     }
@@ -35,10 +34,11 @@ const createWindow = () => {
     writeJSONToFile(filePath, jsonData);
   });
 
-  ipcMain.on('writejson', (event, data) => {
+  ipcMain.on('writeserial', (event, data) => {
     const pyprocess = spawner('python', ['wri.py', data]); 
     pyprocess.stdout.on();   
   });
+
 
   fs.readFile('./setup.json', 'utf8', (err, data) => {
     if(err) {
