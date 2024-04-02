@@ -127,6 +127,11 @@ function GetAndShow() {
       });
 }
 
+function restoresys(){
+  window.electronAPI.saveconfig(1);
+  window.location.href= "setup.html";
+}
+
 GetAndShow();
 
 setInterval(GetAndShow, 1000);
