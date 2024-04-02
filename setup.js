@@ -11,7 +11,6 @@ const pumpCycle = document.getElementById('water-pump-cycle');
 const tankl = document.getElementById('tank-litres');
 const keys = document.querySelectorAll('.key');
 const keys2 = document.querySelectorAll('.key2');
-const keys3 = document.querySelectorAll('.key3');
 
 keys.forEach(key => {
   key.addEventListener('click', () => {
@@ -24,19 +23,6 @@ keys.forEach(key => {
   }
   });
 });
-
-keys3.forEach(key => {
-  key.addEventListener('click', () => {
-    if (key.getAttribute('data-value') === '-1') {
-      tankl.value = tankl.value.slice(0, -1);
-    }
-    else{
-    const keyValue = key.getAttribute('data-value');
-    tankl.value += keyValue;
-  }
-  });
-});
-
 
 function checkButton() {
   var checkbox1 = document.getElementById('checkbox1');
@@ -184,14 +170,14 @@ function submitForm() {
   lighton = document.getElementById("timefrom").value;
   lightoff = document.getElementById("timeto").value;
   waterlevel = document.getElementById('tank-capacity').value;
-  window.electronAPI.writejson(
+  window.electronAPI.writeserial([3,
     {
       "status": 0,
       "wl":waterlevel,
       "ltime":[lighton, lightoff],
-      "mtime":[pumpHour1,pumpHour2]
+      "mtime":[pumpHour1, pumpHour2]
   }
-  );
+  ]);
 }
 
 function finish(){

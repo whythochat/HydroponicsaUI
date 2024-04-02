@@ -12,4 +12,5 @@ match func:
     case 2:
         ser.write("Turn on the lights")
     case 3:
-        ser.write()
+        data = sys.argv[2]
+        ser.write(data)
