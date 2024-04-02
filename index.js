@@ -35,8 +35,10 @@ const createWindow = () => {
   });
 
   ipcMain.on('writeserial', (event, data) => {
-    const pyprocess = spawner('python', ['wri.py', data]); 
-    pyprocess.stdout.on();   
+    const pyprocess = spawner('python', ['wri.py', data[0], JSON.stringify(data[1])]); 
+    pyprocess.stdout.on('data', (data) => {
+      console.log('From python: ' + data)
+    })  
   });
 
 
