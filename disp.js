@@ -3,12 +3,12 @@ var opts = {
   lineWidth: 0.28, // The line thickness
   radiusScale: 0.5, // Relative radius
   pointer: {
-      length: 0.6, // // Relative to gauge radius
-      strokeWidth: 0.035, // The thickness
-      color: '#000000' // Fill color
+    length: 0.6, // // Relative to gauge radius
+    strokeWidth: 0.035, // The thickness
+    color: '#000000' // Fill color
   },
-  limitMax: false, // If false, max value increases automatically if value > maxValue
-  limitMin: false, // If true, the min value of the gauge will be fixed
+  limitMax: true, // If false, max value increases automatically if value > maxValue
+  limitMin: true, // If true, the min value of the gauge will be fixed
   colorStart: '#6F6EA0', // Colors
   colorStop: '#C0C0DB', // just experiment with them
   strokeColor: '#EEEEEE', // to see which ones work best for you
@@ -16,15 +16,20 @@ var opts = {
   highDpiSupport: true, // High resolution support
   // renderTicks is Optional
   renderTicks: {
-      divisions: 6,
-      divWidth: 1.1,
-      divLength: 0.7,
-      divColor: '#333333',
-      subDivisions: 5,
-      subLength: 0.5,
-      subWidth: 0.6,
-      subColor: '#666666'
-  }
+    divisions: 6,
+    divWidth: 1.1,
+    divLength: 0.7,
+    divColor: '#333333',
+    subDivisions: 5,
+    subLength: 0.5,
+    subWidth: 0.6,
+    subColor: '#666666'
+  },
+  staticZones: [
+    { strokeStyle: "#F03E3E", min: 0, max: 20 },
+    { strokeStyle: "#FFDD00", min: 20, max: 30 },
+    { strokeStyle: "#30B32D", min: 30, max: 60 }
+  ]
 
 };
 var target1 = document.getElementById('temp'); // your canvas element
@@ -97,34 +102,43 @@ fm.init({
 });
 
 function setFlow(value) {
-  document.getElementById('wf').innerHTML=value+" ml/s";
-}   
+  document.getElementById('wf').innerHTML = value + " ml/s";
+}
 
 function setPc(value) {
-    document.getElementById('pc').innerHTML=value+" W/h";
-}   
+  document.getElementById('pc').innerHTML = value + " W/h";
+}
 
 function impUpdates() {
-  
+
 }
 
 function GetAndShow() {
   fetch('./info.json')
-      .then(response => response.json())
-      .then(data => {
-          gauge1.set(data.ETc);
-          gauge2.set(data.H);
-          gauge3.set(data.WTc);
-          gauge4.set(data.TDS);
-          gauge5.set(data.pH);
-          gauge6.set(data.CO2);
-          fm.setPercentage(data.wl);
-          setPc(data.P);
-          impUpdates();
-      })
-      .catch(error => {
-          console.error('Error fetching data:', error);
-      });
+    .then(response => response.json())
+    .then(data => {
+      gauge1.set(data.ETc);
+      gauge2.set(data.H);
+      gauge3.set(data.WTc);
+      gauge4.set(data.TDS);
+      gauge5.set(data.pH);
+      gauge6.set(data.CO2);
+      fm.setPercentage(data.wl);
+      setPc(data.P);
+      impUpdates();
+      // Update gauge value boxes
+      document.getElementById('temp-value').innerText = data.ETc;
+      document.getElementById('tds-value').innerText = data.TDS;
+      document.getElementById('hum-value').innerText = data.H;
+      document.getElementById('wt-value').innerText = data.WTc;
+      document.getElementById('ph-value').innerText = data.pH;
+      document.getElementById('co2-value').innerText = data.CO2;
+
+
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
 }
 
 GetAndShow();
