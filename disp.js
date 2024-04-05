@@ -142,9 +142,12 @@ function GetAndShow() {
 }
 
 function restoresys(){
-  window.electronAPI.saveconfig(1);
+  window.electronAPI.saveconfig("0");
   window.location.href= "setup.html";
 }
+
+const button = document.getElementById('myButton');
+button.addEventListener('click', restoresys);
 
 GetAndShow();
 

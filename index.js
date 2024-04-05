@@ -10,14 +10,14 @@ const filePath = './setup.json';
 function writeJSONToFile(filePath, choice) {
   var jsonData;
   switch (choice) {
-    case 0:
+    case "0":
       jsonData = {
         setup: 'not'
-      }
-    case 1:
+      };
+    case "1":
       jsonData = {
         setup: 'done'
-      }
+      };
   }
   fs.writeFile(filePath, JSON.stringify(jsonData, null, 4), (err) => {
       if (err) {
@@ -39,11 +39,12 @@ const createWindow = () => {
     }
   });
 
-  ipcMain.on('saveconfig', (data) => {
+  ipcMain.on('saveconfig', (event, data) => {
+    console.log(data)
     writeJSONToFile(filePath, data);
   });
 
-  ipcMain.on('writeserial', (event, data) => {
+  ipcMain.on('writeserial', (event,data) => {
     const pyprocess = spawner('python', ['wri.py', data[0], JSON.stringify(data[1])]); 
     pyprocess.stdout.on('data', (data) => {
       console.log('From python: ' + data)
@@ -61,11 +62,11 @@ const createWindow = () => {
         win.loadFile('./setup.html');
       }
       else{
+        win.loadFile('./index.html');
         const process = spawner('python', ['wri.py', 2]);
-        pyprocess.stdout.on('data', (data) => {
+        process.stdout.on('data', (data) => {
           console.log('From python: ' + data)
         })  
-        win.loadFile('./index.html');
       }
     }
   })

@@ -181,9 +181,11 @@ function submitForm() {
 }
 
 function finish(){
-  window.electronAPI.saveconfig(0);
+  window.electronAPI.saveconfig("0");
   window.location.href= "index.html";
 }
+
+
 
 // Show the first question initially
 showQuestion(currentQuestion);
