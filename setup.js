@@ -181,7 +181,7 @@ function submitForm() {
 }
 
 function finish(){
-  window.electronAPI.saveconfig();
+  window.electronAPI.saveconfig(0);
   window.location.href= "index.html";
 }
 

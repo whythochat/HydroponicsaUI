@@ -5,11 +5,20 @@ const spawner = require('child_process').spawn;
 
 
 const filePath = './setup.json';
-var jsonData = {
-  setup: 'done'
-}
 
-function writeJSONToFile(filePath, jsonData) {
+
+function writeJSONToFile(filePath, choice) {
+  var jsonData;
+  switch (choice) {
+    case 0:
+      jsonData = {
+        setup: 'not'
+      }
+    case 1:
+      jsonData = {
+        setup: 'done'
+      }
+  }
   fs.writeFile(filePath, JSON.stringify(jsonData, null, 4), (err) => {
       if (err) {
           console.error('Error writing JSON file:', err);
@@ -30,8 +39,8 @@ const createWindow = () => {
     }
   });
 
-  ipcMain.on('saveconfig', () => {
-    writeJSONToFile(filePath, jsonData);
+  ipcMain.on('saveconfig', (data) => {
+    writeJSONToFile(filePath, data);
   });
 
   ipcMain.on('writeserial', (event, data) => {
@@ -52,6 +61,10 @@ const createWindow = () => {
         win.loadFile('./setup.html');
       }
       else{
+        const process = spawner('python', ['wri.py', 2]);
+        pyprocess.stdout.on('data', (data) => {
+          console.log('From python: ' + data)
+        })  
         win.loadFile('./index.html');
       }
     }

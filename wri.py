@@ -10,7 +10,12 @@ match func:
     case 1:
         ser.write("DO pH Calibration")
     case 2:
-        ser.write("Turn on the lights")
+        data = {
+            "status" : 1
+        }
+        ser.write(json.dumps(data))
+        print("Sent status")
     case 3:
         data = sys.argv[2]
         ser.write(data)
+        print("Sent setup data")
