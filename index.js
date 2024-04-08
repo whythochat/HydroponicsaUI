@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const  fs = require('fs');
 const path = require("node:path");
 const spawner = require('child_process').spawn;
-
+const date = new Date()
 
 const filePath = './setup.json';
 
@@ -12,7 +12,8 @@ function writeJSONToFile(filePath, choice) {
   switch (choice) {
     case 0:
       jsonData = {
-        setup: 'not'
+        setup: 'not',
+        time: date.getDate()
       }
     case 1:
       jsonData = {
@@ -62,7 +63,7 @@ const createWindow = () => {
       }
       else{
         const process = spawner('python', ['wri.py', 2]);
-        pyprocess.stdout.on('data', (data) => {
+        process.stdout.on('data', (data) => {
           console.log('From python: ' + data)
         })  
         win.loadFile('./index.html');
