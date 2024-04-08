@@ -142,7 +142,7 @@ function GetAndShow() {
 }
 
 function restoresys(){
-  window.electronAPI.saveconfig("0");
+  window.electronAPI.saveconfig(0);
   window.location.href= "setup.html";
 }
 

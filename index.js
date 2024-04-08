@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const  fs = require('fs');
 const path = require("node:path");
 const spawner = require('child_process').spawn;
-
+const date = new Date()
 
 const filePath = './setup.json';
 
@@ -10,22 +10,26 @@ const filePath = './setup.json';
 function writeJSONToFile(filePath, choice) {
   var jsonData;
   switch (choice) {
-    case "0":
+    case 0:
       jsonData = {
-        setup: 'not'
+        setup: 'not',
+        date : date.getTime()
       };
-    case "1":
+    break;
+    case 1:
       jsonData = {
-        setup: 'done'
+        setup: 'done',
+        date : date.getTime()
       };
+    break;
   }
   fs.writeFile(filePath, JSON.stringify(jsonData, null, 4), (err) => {
-      if (err) {
-          console.error('Error writing JSON file:', err);
-      } else {
-          console.log('JSON file has been saved successfully.');
-      }
-  });
+    if (err) {
+        console.error('Error writing JSON file:', err);
+    } else {
+        console.log('JSON file has been saved successfully.');
+    }
+});
 }
 
 const createWindow = () => {
