@@ -158,6 +158,38 @@ function tdschk(){
   }, 1000);
 }
 
+function startPhCalibration(){
+  window.electronAPI.writeserial([3,
+    {
+      "status": 2
+  }
+  ]);
+}
+
+function turnLightsOnOff(){
+  window.electronAPI.writeserial([3,
+    {
+      "status": 3
+  }
+  ]);
+}
+
+function startTdsCalibration(){
+  window.electronAPI.writeserial([3,
+    {
+      "status": 4
+  }
+  ]);
+}
+
+function turnMotorOnOff(){
+  window.electronAPI.writeserial([3,
+    {
+      "status": 5
+  }
+  ]);
+}
+
 function updatetds(){ 
     setTimeout( () => {
     var newValue = 6 //Math.round(Math.random() * 500);
@@ -184,8 +216,6 @@ function finish(){
   window.electronAPI.saveconfig(1);
   window.location.href= "index.html";
 }
-
-
 
 // Show the first question initially
 showQuestion(currentQuestion);
