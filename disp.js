@@ -32,6 +32,8 @@ var opts = {
   ]
 
 };
+
+
 var target1 = document.getElementById('temp'); // your canvas element
 var gauge1 = new Gauge(target1).setOptions(opts); // create sexy gauge!
 gauge1.maxValue = 60; // set max gauge value
@@ -113,7 +115,34 @@ function impUpdates() {
 
 }
 
+function daysBetweenCurrentDateAndDate(date) {
+  // Get the current date
+  const currentDate = new Date();
+
+  // Convert both dates to milliseconds
+  const currentDateMs = currentDate.getTime();
+  const providedDateMs = date.getTime();
+
+  // Calculate the difference in milliseconds
+  const differenceMs = Math.abs(providedDateMs - currentDateMs);
+
+  // Convert the difference back to days
+  const daysDifference = Math.ceil(differenceMs / (1000 * 60 * 60 * 24));
+
+  return daysDifference;
+}
+
 function GetAndShow() {
+  fetch('./setup.json')
+  .then(response => response.json())
+  .then(data => {
+    days = daysBetweenCurrentDateAndDate(new Date(data.date))
+    document.getElementById("daycount").innerHTML = "Day " + days
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  });
+  console.log("Fetched config")
   fetch('./info.json')
     .then(response => response.json())
     .then(data => {
@@ -133,12 +162,12 @@ function GetAndShow() {
       document.getElementById('wt-value').innerText = data.WTc;
       document.getElementById('ph-value').innerText = data.pH;
       document.getElementById('co2-value').innerText = data.CO2;
-
-
     })
     .catch(error => {
       console.error('Error fetching data:', error);
     });
+    
+  console.log("Fetched config")
 }
 
 function restoresys(){

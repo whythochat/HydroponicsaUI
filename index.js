@@ -13,13 +13,13 @@ function writeJSONToFile(filePath, choice) {
     case 0:
       jsonData = {
         setup: 'not',
-        date : date.getTime()
+        date : date
       };
     break;
     case 1:
       jsonData = {
         setup: 'done',
-        date : date.getTime()
+        date : date
       };
     break;
   }
