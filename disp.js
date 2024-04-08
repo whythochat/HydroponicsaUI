@@ -164,6 +164,9 @@ function daysBetweenCurrentDateAndDate(date) {
   // Get the current date
   const currentDate = new Date();
 
+  console.log(currentDate)
+  console.log(date)
+
   // Convert both dates to milliseconds
   const currentDateMs = currentDate.getTime();
   const providedDateMs = date.getTime();
