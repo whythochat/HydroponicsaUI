@@ -12,4 +12,3 @@ while True:
     line = json.loads(line)
     with open('info.json', 'w') as f:
         json.dump(line, f)
-
