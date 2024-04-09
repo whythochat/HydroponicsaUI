@@ -66,11 +66,6 @@ keys2.forEach(key => {
 let currentQuestion = 1;
 const questions = document.querySelectorAll('.question');
 
-function updateProgressBar(litres) {
-  progressBarFill = document.getElementById('progress-bar-fill');
-  progressBarFill.style.width = litres/document.getElementById('tank-capacity').value * 100 + '%';
-}
-
 document.getElementById('lights').addEventListener('change', () =>{
   var selectedOption = document.querySelector('input[name="option"]:checked').value;
 
@@ -122,38 +117,51 @@ function skipQuestion(){
 
 function updateph(){ 
     setTimeout( () => {
-    var newValue = 6 //Math.round(Math.random() * 14 * 10) / 10;
+    var newValue, stat
+    fetch('./info.json')
+    .then(response => response.json())
+    .then(data => {
+      newValue = data.ph
+      stat = data.pc
+    })
     document.getElementById('phval').innerHTML = newValue;
-    if (newValue >= 5.5 && newValue <= 6.0) {
+    if (stat == 1) {
     document.getElementById('loading-icon').style.display = 'none';
     document.getElementById('tick-mark').style.display = 'block';
     document.getElementById('phch').disabled = false;
     updateph()
     }
-    else{
-      updateph()
-      document.getElementById('phch').disabled = true;
-      document.getElementById('loading-icon').style.display = 'block';
-      document.getElementById('tick-mark').style.display = 'none';
-    }
   }, 1000);
+}
+
+function updatetds(){ 
+  setTimeout( () => {
+  var newValue
+  fetch('./info.json')
+  .then(response => response.json())
+  .then(data => {
+    newValue = data.tds   
+  })
+  document.getElementById('tdsval').innerHTML = newValue;
+  updatetds()
+}, 1000);
 }
 
 function tdschk(){ 
     setTimeout( () => {
-    var newValue = 350 //Math.round(Math.random() * 14 * 10) / 10;
+    var newValue, stat
+    fetch('./info.json')
+    .then(response => response.json())
+    .then(data => {
+      newValue = data.tds
+      stat = data.tc
+    })
     document.getElementById('tdsval2').innerHTML = newValue + " ppm";
-    if (newValue >= 340 && newValue <= 360) {
+    if (stat == 1) {
     document.getElementById('loading-icon2').style.display = 'none';
     document.getElementById('tick-mark2').style.display = 'block';
     document.getElementById('tdsch').disabled = false;
     tdschk()
-    }
-    else{
-      tdschk()
-      document.getElementById('tdsch').disabled = true;
-      document.getElementById('loading-icon2').style.display = 'block';
-      document.getElementById('tick-mark2').style.display = 'none';
     }
   }, 1000);
 }
@@ -167,6 +175,14 @@ function startPhCalibration(){
 }
 
 function turnLightsOnOff(){
+  window.electronAPI.writeserial([3,
+    {
+      "status": 5
+  }
+  ]);
+}
+
+function showTdsValue(){
   window.electronAPI.writeserial([3,
     {
       "status": 3
@@ -185,18 +201,11 @@ function startTdsCalibration(){
 function turnMotorOnOff(){
   window.electronAPI.writeserial([3,
     {
-      "status": 5
+      "status": 6
   }
   ]);
 }
 
-function updatetds(){ 
-    setTimeout( () => {
-    var newValue = 6 //Math.round(Math.random() * 500);
-    document.getElementById('tdsval').innerHTML = newValue;
-    updatetds()
-  }, 1000);
-}
 
 function submitForm() {
   lighton = document.getElementById("timefrom").value;
@@ -204,17 +213,23 @@ function submitForm() {
   waterlevel = document.getElementById('tank-capacity').value;
   window.electronAPI.writeserial([3,
     {
-      "status": 0,
+      "status": 1,
       "wl":waterlevel,
       "ltime":[lighton, lightoff],
       "mtime":[pumpHour1, pumpHour2]
   }
   ]);
+  setTimeoutstartPhCalibration();
 }
 
 function finish(){
   window.electronAPI.saveconfig(1);
-  window.location.href= "index.html";
+  window.electronAPI.writeserial([3,
+    {
+      "status": 0
+  }
+  ]);
+  window.location.href= "index.html";  
 }
 
 // Show the first question initially
