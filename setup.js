@@ -136,33 +136,30 @@ function updateph(){
 
 function updatetds(){ 
   setInterval( () => {
-  var newValue
   fetch('./info.json')
   .then(response => response.json())
   .then(data => {
-    newValue = data.tds   
+    document.getElementById('tdsval').innerHTML = data.TDS   
   })
-  document.getElementById('tdsval').innerHTML = newValue;
   updatetds()
 }, 1000);
 }
 
 function tdschk(){ 
-    setTimeout( () => {
-    var newValue, stat
+    setInterval( () => {
     fetch('./info.json')
     .then(response => response.json())
     .then(data => {
-      newValue = data.tds
-      stat = data.tc
+      var newValue = data.TDS
+      var stat = data.tc
+      document.getElementById('tdsval2').innerHTML = newValue + " ppm";
+      if (stat == 1) {
+        document.getElementById('loading-icon2').style.display = 'none';
+        document.getElementById('tick-mark2').style.display = 'block';
+        document.getElementById('tdsch').disabled = false;
+        tdschk()
+        }
     })
-    document.getElementById('tdsval2').innerHTML = newValue + " ppm";
-    if (stat == 1) {
-    document.getElementById('loading-icon2').style.display = 'none';
-    document.getElementById('tick-mark2').style.display = 'block';
-    document.getElementById('tdsch').disabled = false;
-    tdschk()
-    }
   }, 1000);
 }
 

@@ -96,13 +96,13 @@
     <p>Calibrating pH wait a moment</p>
     <div id="phval">5.5</div><div id="loading-icon" class="loader"></div>
     <div id="tick-mark">&#10004;</div>
-    <button id="phch" onclick="nextQuestion(); updatetds();" disabled>Next</button>
+    <button id="phch" onclick="nextQuestion(); updatetds(); showTdsValue()" disabled>Next</button>
   </div>
   <div class="question" id="question8">
     <h2>Calibration</h2>
     <p>The TDS value (ideally, this should be between 60 and 100 ppm before adding the solutions)</p>
     <div id="tdsval">60</div>
-    <button onclick="nextQuestion();tdschk(); startTdsCalibration()">Next</button>
+    <button onclick="nextQuestion(); tdschk(); startTdsCalibration()">Next</button>
   </div>
   <div class="question" id="question9">
     <h2>Calibration</h2>
