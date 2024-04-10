@@ -1,11 +1,16 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const  fs = require('fs');
 const path = require("node:path");
+const spawnrec = require('child_process').spawn;
 const spawner = require('child_process').spawn;
 const date = new Date()
 
 const filePath = './setup.json';
 
+const pythonprocess = spawnrec('python', ['rec.py']);
+pythonprocess.stdout.on('data', (data) => {
+  console.log('From python: ' + data)
+})
 
 function writeJSONToFile(filePath, choice) {
   var jsonData;
@@ -53,6 +58,9 @@ const createWindow = () => {
     pyprocess.stdout.on('data', (data) => {
       console.log('From python: ' + data)
     })  
+    setTimeout(() => {
+      pyprocess.kill()
+    }, 1000)
   });
 
 
@@ -79,10 +87,6 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
   createWindow();
-  const pythonprocess = spawner('python', ['rec.py']);
-  pythonprocess.stdout.on('data', (data) => {
-    console.log('From python: ' + data)
-  })
 });
 
 

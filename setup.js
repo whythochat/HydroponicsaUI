@@ -66,11 +66,6 @@ keys2.forEach(key => {
 let currentQuestion = 1;
 const questions = document.querySelectorAll('.question');
 
-function updateProgressBar(litres) {
-  progressBarFill = document.getElementById('progress-bar-fill');
-  progressBarFill.style.width = litres/document.getElementById('tank-capacity').value * 100 + '%';
-}
-
 document.getElementById('lights').addEventListener('change', () =>{
   var selectedOption = document.querySelector('input[name="option"]:checked').value;
 
@@ -121,71 +116,117 @@ function skipQuestion(){
 }
 
 function updateph(){ 
-    setTimeout( () => {
-    var newValue = 6 //Math.round(Math.random() * 14 * 10) / 10;
-    document.getElementById('phval').innerHTML = newValue;
-    if (newValue >= 5.5 && newValue <= 6.0) {
-    document.getElementById('loading-icon').style.display = 'none';
-    document.getElementById('tick-mark').style.display = 'block';
-    document.getElementById('phch').disabled = false;
-    updateph()
-    }
-    else{
-      updateph()
-      document.getElementById('phch').disabled = true;
-      document.getElementById('loading-icon').style.display = 'block';
-      document.getElementById('tick-mark').style.display = 'none';
-    }
-  }, 1000);
-}
-
-function tdschk(){ 
-    setTimeout( () => {
-    var newValue = 350 //Math.round(Math.random() * 14 * 10) / 10;
-    document.getElementById('tdsval2').innerHTML = newValue + " ppm";
-    if (newValue >= 340 && newValue <= 360) {
-    document.getElementById('loading-icon2').style.display = 'none';
-    document.getElementById('tick-mark2').style.display = 'block';
-    document.getElementById('tdsch').disabled = false;
-    tdschk()
-    }
-    else{
-      tdschk()
-      document.getElementById('tdsch').disabled = true;
-      document.getElementById('loading-icon2').style.display = 'block';
-      document.getElementById('tick-mark2').style.display = 'none';
-    }
-  }, 1000);
+    const interval = setInterval( () => {
+    var newValue, stat
+    fetch('./info.json')
+    .then(response => response.json())
+    .then(data => {
+      newValue = data.pH
+      document.getElementById('phval').innerHTML = newValue;
+      stat = data.pc
+      if (stat == 1) {
+      document.getElementById('loading-icon').style.display = 'none';
+      document.getElementById('tick-mark').style.display = 'block';
+      document.getElementById('phch').disabled = false;
+      clearInterval(interval)
+      }
+    })
+  }, 500);
 }
 
 function updatetds(){ 
-    setTimeout( () => {
-    var newValue = 6 //Math.round(Math.random() * 500);
-    document.getElementById('tdsval').innerHTML = newValue;
-    updatetds()
-  }, 1000);
+  const interval = setInterval( () => {
+  fetch('./info.json')
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('tdsval').innerHTML = data.TDS   
+  })
+}, 500);
 }
 
-function submitForm() {
-  lighton = document.getElementById("timefrom").value;
-  lightoff = document.getElementById("timeto").value;
-  waterlevel = document.getElementById('tank-capacity').value;
+function tdschk(){ 
+    const interval = setInterval( () => {
+    fetch('./info.json')
+    .then(response => response.json())
+    .then(data => {
+      var newValue = data.TDS
+      var stat = data.tc
+      document.getElementById('tdsval2').innerHTML = newValue + " ppm";
+      if (stat == 1) {
+        document.getElementById('loading-icon2').style.display = 'none';
+        document.getElementById('tick-mark2').style.display = 'block';
+        document.getElementById('tdsch').disabled = false;
+        clearInterval(interval)
+        }
+    })
+  }, 500);
+}
+
+function startPhCalibration(){
   window.electronAPI.writeserial([3,
     {
-      "status": 0,
-      "wl":waterlevel,
-      "ltime":[lighton, lightoff],
-      "mtime":[pumpHour1, pumpHour2]
+      "status": 2
   }
   ]);
 }
 
-function finish(){
-  window.electronAPI.saveconfig(1);
-  window.location.href= "index.html";
+function turnLightsOnOff(){
+  window.electronAPI.writeserial([3,
+    {
+      "status": 5
+  }
+  ]);
+}
+
+function showTdsValue(){
+  window.electronAPI.writeserial([3,
+    {
+      "status": 3
+  }
+  ]);
+}
+
+function startTdsCalibration(){
+  window.electronAPI.writeserial([3,
+    {
+      "status": 4
+  }
+  ]);
+}
+
+function turnMotorOnOff(){
+  window.electronAPI.writeserial([3,
+    {
+      "status": 6
+  }
+  ]);
 }
 
 
+function submitForm() {
+  lighton = document.getElementById("timefrom").value.split(':')[0];
+  lightoff = document.getElementById("timeto").value.split(':')[0];
+  waterlevel = document.getElementById('tank-capacity').value;
+  window.electronAPI.writeserial([3,
+    {
+      "status": 1,
+      "WL":parseInt(waterlevel,10),
+      "l_time":[parseInt(lighton, 10), parseInt(lightoff, 10)],
+      "m_time":[parseInt(pumpHour1, 10), parseInt(pumpHour2, 10)]
+  }
+  ]);
+  setTimeout(startPhCalibration, 500);
+}
+
+function finish(){
+  window.electronAPI.saveconfig(1);
+  window.electronAPI.writeserial([3,
+    {
+      "status": 0
+  }
+  ]);
+  window.location.href= "index.html";  
+}
 
 // Show the first question initially
 showQuestion(currentQuestion);

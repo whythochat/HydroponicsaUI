@@ -1,21 +1,9 @@
 import serial
-import json
 import sys
-
+import gc
+gc.collect()
 ser = serial.Serial(port='/dev/ttyS0', baudrate=9600, timeout=1)
 
-func = sys.argv[1]
-
-match func:
-    case 1:
-        ser.write("DO pH Calibration")
-    case 2:
-        data = {
-            "status" : 1
-        }
-        ser.write(json.dumps(data))
-        print("Sent status")
-    case 3:
-        data = sys.argv[2]
-        ser.write(data)
-        print("Sent setup data")
+data = sys.argv[2]
+ser.write(data.encode())
+print("Sent setup data")

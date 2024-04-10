@@ -352,10 +352,6 @@ function setPc(value) {
   document.getElementById('pc').innerHTML = value + " W/h";
 }
 
-function impUpdates() {
-
-}
-
 function daysBetweenCurrentDateAndDate(date) {
   // Get the current date
   const currentDate = new Date();
@@ -410,8 +406,11 @@ function GetAndShow() {
     .catch(error => {
       console.error('Error fetching data:', error);
     });
-
-  console.log("Fetched config")
+    window.electronAPI.writeserial([3,
+      {
+        "status": 0
+    }
+    ]);
 }
 
 function restoresys() {

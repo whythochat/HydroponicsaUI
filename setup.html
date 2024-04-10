@@ -72,8 +72,8 @@
     <h2>Lights</h2>
     <p>What period of time do you want the lights to be on(Not applicable if you chose natural)?</p>
     <form id="lightstime">
-      <label for="timefrom">From</label><input type="time" id="timefrom"><br> 
-      <label for="timeto">To</label><input type="time" id="timeto"><br>
+      <label for="timefrom">From</label><input type="time" id="timefrom" step="3600"><br> 
+      <label for="timeto">To</label><input type="time" id="timeto" step="3600"><br>
     </form>
     <button onclick="nextQuestion()">Next</button>
   </div>
@@ -89,20 +89,20 @@
       <li><input class="checks" type="checkbox" id="checkbox5" onclick="checkButton()"> <label for="checkbox5">Overall requirements</label><br></li>
       </ul>
     </form>
-    <button id="reqb" onclick="nextQuestion(); updateph(); submitForm()" disabled>Start</button>
+    <button id="reqb" onclick="nextQuestion(); updateph(); submitForm(); " disabled>Start</button>
   </div>
   <div class="question" id="question7">
     <h2>Calibration</h2>
     <p>Calibrating pH wait a moment</p>
     <div id="phval">5.5</div><div id="loading-icon" class="loader"></div>
     <div id="tick-mark">&#10004;</div>
-    <button id="phch" onclick="nextQuestion(); updatetds()" disabled>Next</button>
+    <button id="phch" onclick="nextQuestion(); updatetds(); showTdsValue()" disabled>Next</button>
   </div>
   <div class="question" id="question8">
     <h2>Calibration</h2>
     <p>The TDS value (ideally, this should be between 60 and 100 ppm before adding the solutions)</p>
     <div id="tdsval">60</div>
-    <button onclick="nextQuestion();tdschk()">Next</button>
+    <button onclick="nextQuestion(); tdschk(); startTdsCalibration()">Next</button>
   </div>
   <div class="question" id="question9">
     <h2>Calibration</h2>
@@ -113,14 +113,12 @@
   </div>
   <div class="question" id="question10">
     <h2>Last Step</h2>
-    <p>Check if these are okay</p>
+    <p>Check if these are working fine</p>
     <ul>
-      <li>Check if the lights are installed properly</li>
-      <li>Check the pump</li>
-      <li>Verify pH</li>
-      <li>Verify TDS</li>
+      <li><button onclick="turnLightsOnOff()">Check if the lights are installed properly</button></li>
+      <li><button onclick="turnMotorOnOff()">Check the pump</button></li>
     </ul>
-    <button onclick="finish()">Done</button>
+    <button onclick="submitForm(); finish()">Done</button>
   </div>
 </div>
 <script type="text/javascript" src="./setup.js"></script>
