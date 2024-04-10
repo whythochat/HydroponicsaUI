@@ -60,7 +60,7 @@ const createWindow = () => {
     })  
     setTimeout(() => {
       pyprocess.kill()
-    }, 1000)
+    }, 2000)
   });
 
 
