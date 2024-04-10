@@ -116,26 +116,26 @@ function skipQuestion(){
 }
 
 function updateph(){ 
-    setTimeout( () => {
+    setInterval( () => {
     var newValue, stat
     fetch('./info.json')
     .then(response => response.json())
     .then(data => {
-      newValue = data.ph
+      newValue = data.pH
+      document.getElementById('phval').innerHTML = newValue;
       stat = data.pc
+      if (stat == 1) {
+      document.getElementById('loading-icon').style.display = 'none';
+      document.getElementById('tick-mark').style.display = 'block';
+      document.getElementById('phch').disabled = false;
+      updateph()
+      }
     })
-    document.getElementById('phval').innerHTML = newValue;
-    if (stat == 1) {
-    document.getElementById('loading-icon').style.display = 'none';
-    document.getElementById('tick-mark').style.display = 'block';
-    document.getElementById('phch').disabled = false;
-    updateph()
-    }
   }, 1000);
 }
 
 function updatetds(){ 
-  setTimeout( () => {
+  setInterval( () => {
   var newValue
   fetch('./info.json')
   .then(response => response.json())
@@ -208,18 +208,18 @@ function turnMotorOnOff(){
 
 
 function submitForm() {
-  lighton = document.getElementById("timefrom").value;
-  lightoff = document.getElementById("timeto").value;
+  lighton = document.getElementById("timefrom").value.split(':')[0];
+  lightoff = document.getElementById("timeto").value.split(':')[0];
   waterlevel = document.getElementById('tank-capacity').value;
   window.electronAPI.writeserial([3,
     {
       "status": 1,
-      "wl":waterlevel,
-      "ltime":[lighton, lightoff],
-      "mtime":[pumpHour1, pumpHour2]
+      "WL":parseInt(waterlevel,10),
+      "l_time":[parseInt(lighton, 10), parseInt(lightoff, 10)],
+      "m_time":[parseInt(pumpHour1, 10), parseInt(pumpHour2, 10)]
   }
   ]);
-  setTimeoutstartPhCalibration();
+  setTimeout(startPhCalibration, 1000);
 }
 
 function finish(){
