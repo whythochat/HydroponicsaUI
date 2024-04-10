@@ -116,7 +116,7 @@ function skipQuestion(){
 }
 
 function updateph(){ 
-    setInterval( () => {
+    const interval = setInterval( () => {
     var newValue, stat
     fetch('./info.json')
     .then(response => response.json())
@@ -128,25 +128,24 @@ function updateph(){
       document.getElementById('loading-icon').style.display = 'none';
       document.getElementById('tick-mark').style.display = 'block';
       document.getElementById('phch').disabled = false;
-      updateph()
+      clearInterval(interval)
       }
     })
-  }, 1000);
+  }, 500);
 }
 
 function updatetds(){ 
-  setInterval( () => {
+  const interval = setInterval( () => {
   fetch('./info.json')
   .then(response => response.json())
   .then(data => {
     document.getElementById('tdsval').innerHTML = data.TDS   
   })
-  updatetds()
-}, 1000);
+}, 500);
 }
 
 function tdschk(){ 
-    setInterval( () => {
+    const interval = setInterval( () => {
     fetch('./info.json')
     .then(response => response.json())
     .then(data => {
@@ -157,10 +156,10 @@ function tdschk(){
         document.getElementById('loading-icon2').style.display = 'none';
         document.getElementById('tick-mark2').style.display = 'block';
         document.getElementById('tdsch').disabled = false;
-        tdschk()
+        clearInterval(interval)
         }
     })
-  }, 1000);
+  }, 500);
 }
 
 function startPhCalibration(){
@@ -216,7 +215,7 @@ function submitForm() {
       "m_time":[parseInt(pumpHour1, 10), parseInt(pumpHour2, 10)]
   }
   ]);
-  setTimeout(startPhCalibration, 1000);
+  setTimeout(startPhCalibration, 500);
 }
 
 function finish(){
