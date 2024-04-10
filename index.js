@@ -58,6 +58,9 @@ const createWindow = () => {
     pyprocess.stdout.on('data', (data) => {
       console.log('From python: ' + data)
     })  
+    setTimeout(() => {
+      pyprocess.kill()
+    }, 1000)
   });
 
 

@@ -1,6 +1,10 @@
 import serial
 import json
 
+
+import gc
+gc.collect()
+
 ser = serial.Serial(port='/dev/ttyS0', baudrate=9600, timeout=0.5)    #Open port with baud rate
 
 while True:
@@ -12,6 +16,7 @@ while True:
     line = json.loads(line)
     with open('info.json', 'w') as f:
         json.dump(line, f)
+        f.flush()
 
 '''
 import serial
