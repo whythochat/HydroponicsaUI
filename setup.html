@@ -1,126 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Setup Form</title>
-<link rel="stylesheet" href="./setup.css">
-</head>
-<body>
-<div class="carousel">
-  <div class="question" id="question1">
-    <h2>Let's get started</h2>
-    <p>Click next to progress the set up</p>
-    <button onclick="nextQuestion()">Next</button>
-  </div>
-  <div class="question" id="question2">
-    <h2>How high is the water when the tank is full(cm)?</h2>
-    <p><input placeholder="Centimeters" type="text" id="tank-capacity"></p>
-    <div class="number-pad">
-      <div data-value="1" class="key">1</div>
-      <div data-value="2" class="key">2</div>
-      <div data-value="3" class="key">3</div>
-      <div data-value="4" class="key">4</div>
-      <div data-value="5" class="key">5</div>
-      <div data-value="6" class="key">6</div>
-      <div data-value="7" class="key">7</div>
-      <div data-value="8" class="key">8</div>
-      <div data-value="9" class="key">9</div>
-      <div data-value="0" class="key">0</div>
-      <div data-value="-1" class="key">⌫</div>
-    </div>
-    <button onclick="nextQuestion()">Next</button>
-  </div>
-  <div class="question" id="question3">
-    <h2>Water Pump Cycle</h2>
-    <p>How many minutes an hour would you like the pump to run?<br>(Seperate with a /)</p>
-    
-    <input placeholder="hours/hours" type="text" id="water-pump-cycle" class="input-box" >
-    <div class="number-pad">
-      <div data-value="1" class="key2">1</div>
-      <div data-value="2" class="key2">2</div>
-      <div data-value="3" class="key2">3</div>
-      <div data-value="4" class="key2">4</div>
-      <div data-value="5" class="key2">5</div>
-      <div data-value="6" class="key2">6</div>
-      <div data-value="7" class="key2">7</div>
-      <div data-value="8" class="key2">8</div>
-      <div data-value="9" class="key2">9</div>
-      <div data-value="0" class="key2">0</div>
-      <div data-value="/" class="key2">/</div>
-      <div data-value="-1" class="key2">⌫</div>
-    </div>
-    <button onclick="nextQuestion()">Next</button>
-  </div>
-  <div class="question" id="question4">
-    <h2>Lights</h2>
-    <p>What kind of lighting is available?</p>
-    <form id="lights">
-      <input type="radio" name="option" id="artificial" value="artificial"><label for="artificial">Artificial</label><br> 
-      <input type="radio" name="option" id="natural" value="natural"><label for="natural">Natural</label><br>
-    </form>
-    <button onclick="    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Setup Form</title>
+    <link rel="stylesheet" href="./setup.css" />
+  </head>
+  <body>
+    <div class="carousel">
+      <div class="question" id="question1">
+        <h2>Let's get started</h2>
+        <p>Click next to progress the set up</p>
+        <button class="btn" onclick="nextQuestion()">Next</button>
+      </div>
+      <div class="question" id="question2">
+        <h2>How high is the water when the tank is full(cm)?</h2>
+        <p>
+          <input placeholder="Centimeters" type="text" id="tank-capacity" />
+        </p>
+        <div class="number-pad">
+          <div data-value="1" class="key">1</div>
+          <div data-value="2" class="key">2</div>
+          <div data-value="3" class="key">3</div>
+          <div data-value="4" class="key">4</div>
+          <div data-value="5" class="key">5</div>
+          <div data-value="6" class="key">6</div>
+          <div data-value="7" class="key">7</div>
+          <div data-value="8" class="key">8</div>
+          <div data-value="9" class="key">9</div>
+          <div data-value="0" class="key">0</div>
+          <div data-value="-1" class="key">⌫</div>
+        </div>
+        <button class="btn" onclick="nextQuestion()">Next</button>
+      </div>
+      <div class="question" id="question3">
+        <h2>Water Pump Cycle</h2>
+        <p>
+          How many minutes an hour would you like the pump to run?<br />(Seperate
+          with a /)
+        </p>
+
+        <input
+          placeholder="hours/hours"
+          type="text"
+          id="water-pump-cycle"
+          class="input-box" />
+        <div class="number-pad">
+          <div data-value="1" class="key2">1</div>
+          <div data-value="2" class="key2">2</div>
+          <div data-value="3" class="key2">3</div>
+          <div data-value="4" class="key2">4</div>
+          <div data-value="5" class="key2">5</div>
+          <div data-value="6" class="key2">6</div>
+          <div data-value="7" class="key2">7</div>
+          <div data-value="8" class="key2">8</div>
+          <div data-value="9" class="key2">9</div>
+          <div data-value="0" class="key2">0</div>
+          <div data-value="/" class="key2">/</div>
+          <div data-value="-1" class="key2">⌫</div>
+        </div>
+        <button class="back-button" onclick="previousQuestion()">back</button>
+        <button class="btn" onclick="nextQuestion()">Next</button>
+      </div>
+      <div class="question" id="question4">
+        <h2>Lights</h2>
+        <p>What kind of lighting is available?</p>
+        <form id="lights" class="content">
+          <input
+            type="radio"
+            class="checks"
+            name="option"
+            id="artificial"
+            value="artificial" /><label for="artificial">Artificial</label
+          ><br />
+          <input
+            type="radio"
+            class="checks"
+            name="option"
+            id="natural"
+            value="natural" /><label for="natural">Natural</label><br />
+        </form>
+        <button class="back-button" onclick="previousQuestion()">back</button>
+        <button
+          class="btn"
+          onclick="    
     if(typeOfLights == 'artificial'){
       nextQuestion();
     }
     else{
       skipQuestion();
     }
-    ">Next</button>
-  </div>
-  <div class="question" id="question5">
-    <h2>Lights</h2>
-    <p>What period of time do you want the lights to be on(Not applicable if you chose natural)?</p>
-    <form id="lightstime">
-      <label for="timefrom">From</label><input type="time" id="timefrom" step="3600"><br> 
-      <label for="timeto">To</label><input type="time" id="timeto" step="3600"><br>
-    </form>
-    <button onclick="nextQuestion()">Next</button>
-  </div>
-  <div class="question" id="question6">
-    <h2>Calibration</h2>
-    <p>Make sure all the requirements are ready for calibration to start.</p>
-    <form id="req">
-      <ul class="list">
-      <li><input class="checks" type="checkbox" id="checkbox1" onclick="checkButton()"> <label for="checkbox1">A, B, N<sub>A</sub>, N<sub>B</sub> is filled</label><br></li>
-      <li><input class="checks" type="checkbox" id="checkbox2" onclick="checkButton()"> <label for="checkbox2">Lights and motors plugged in</label><br></li>
-      <li><input class="checks" type="checkbox" id="checkbox3" onclick="checkButton()"> <label for="checkbox3">Tank filled with RO water</label><br></li>
-      <li><input class="checks" type="checkbox" id="checkbox4" onclick="checkButton()"> <label for="checkbox4">Seedling period satisfied</label><br></li>
-      <li><input class="checks" type="checkbox" id="checkbox5" onclick="checkButton()"> <label for="checkbox5">Overall requirements</label><br></li>
-      </ul>
-    </form>
-    <button id="reqb" onclick="nextQuestion(); updateph(); submitForm(); " disabled>Start</button>
-  </div>
-  <div class="question" id="question7">
-    <h2>Calibration</h2>
-    <p>Calibrating pH wait a moment</p>
-    <div id="phval">5.5</div><div id="loading-icon" class="loader"></div>
-    <div id="tick-mark">&#10004;</div>
-    <button id="phch" onclick="nextQuestion(); updatetds(); showTdsValue()" disabled>Next</button>
-  </div>
-  <div class="question" id="question8">
-    <h2>Calibration</h2>
-    <p>The TDS value (ideally, this should be between 60 and 100 ppm before adding the solutions)</p>
-    <div id="tdsval">60</div>
-    <button onclick="nextQuestion(); tdschk(); startTdsCalibration()">Next</button>
-  </div>
-  <div class="question" id="question9">
-    <h2>Calibration</h2>
-    <p>Calibrating TDS wait a moment</p>
-    <div id="tdsval2">350 ppm</div><div id="loading-icon2" class="loader"></div>
-    <div id="tick-mark2">&#10004;</div>
-    <button id="tdsch" onclick="nextQuestion()" disabled>Next</button>
-  </div>
-  <div class="question" id="question10">
-    <h2>Last Step</h2>
-    <p>Check if these are working fine</p>
-    <ul>
-      <li><button onclick="turnLightsOnOff()">Check if the lights are installed properly</button></li>
-      <li><button onclick="turnMotorOnOff()">Check the pump</button></li>
-    </ul>
-    <button onclick="finish()">Done</button>
-  </div>
-</div>
-<script type="text/javascript" src="./setup.js"></script>
-</body>
+    ">
+          Next
+        </button>
+      </div>
+      <div class="question" id="question5">
+        <h2>Lights</h2>
+        <p>
+          What period of time do you want the lights to be on(Not applicable if
+          you chose natural)?
+        </p>
+        <form id="lightstime" class="light">
+          <label for="timefrom">From</label
+          ><input type="time" id="timefrom" step="3600" /><br />
+          <label for="timeto">To</label
+          ><input type="time" id="timeto" step="3600" /><br />
+        </form>
+        <button class="back-button" onclick="previousQuestion()">back</button>
+        <button class="btn" onclick="nextQuestion()">Next</button>
+      </div>
+      <div class="question" id="question6">
+        <h2>Calibration</h2>
+        <p>
+          Make sure all the requirements are ready for calibration to start.
+        </p>
+        <form id="req">
+          <ul class="list">
+            <li>
+              <input
+                class="checks"
+                type="checkbox"
+                id="checkbox1"
+                onclick="checkButton()" />
+              <label for="checkbox1"
+                >A, B, N<sub>A</sub>, N<sub>B</sub> is filled</label
+              ><br />
+            </li>
+            <li>
+              <input
+                class="checks"
+                type="checkbox"
+                id="checkbox2"
+                onclick="checkButton()" />
+              <label for="checkbox2">Lights and motors plugged in</label><br />
+            </li>
+            <li>
+              <input
+                class="checks"
+                type="checkbox"
+                id="checkbox3"
+                onclick="checkButton()" />
+              <label for="checkbox3">Tank filled with RO water</label><br />
+            </li>
+            <li>
+              <input
+                class="checks"
+                type="checkbox"
+                id="checkbox4"
+                onclick="checkButton()" />
+              <label for="checkbox4">Seedling period satisfied</label><br />
+            </li>
+            <li>
+              <input
+                class="checks"
+                type="checkbox"
+                id="checkbox5"
+                onclick="checkButton()" />
+              <label for="checkbox5">Overall requirements</label><br />
+            </li>
+          </ul>
+        </form>
+        <button class="back-button" onclick="previous_Question()">back</button>
+        <button
+          id="reqb"
+          class="btn"
+          onclick="nextQuestion(); updateph(); submitForm(); "
+          disabled>
+          Start
+        </button>
+      </div>
+      <div class="question" id="question7">
+        <h2>Calibration</h2>
+        <p>Calibrating pH wait a moment</p>
+        <div id="phval">5.5</div>
+        <div id="loading-icon" class="loader"></div>
+        <div id="tick-mark">&#10004;</div>
+        <button class="back-button" onclick="previousQuestion()">back</button>
+        <button
+          id="phch"
+          class="btn"
+          onclick="nextQuestion(); updatetds(); showTdsValue()"
+          disabled>
+          Next
+        </button>
+      </div>
+      <div class="question" id="question8">
+        <h2>Calibration</h2>
+        <p>
+          The TDS value (ideally, this should be between 60 and 100 ppm before
+          adding the solutions)
+        </p>
+        <div id="tdsval">60</div>
+        <button class="back-button" onclick="previous_Question()">back</button>
+        <button
+          class="btn"
+          onclick="nextQuestion(); tdschk(); startTdsCalibration()">
+          Next
+        </button>
+      </div>
+      <div class="question" id="question9">
+        <h2>Calibration</h2>
+        <p>Calibrating TDS wait a moment</p>
+        <div id="tdsval2">350 ppm</div>
+        <div id="loading-icon2" class="loader"></div>
+        <div id="tick-mark2">&#10004;</div>
+        <button class="back-button" onclick="previousQuestion()">back</button>
+        <button class="btn" onclick="nextQuestion()" disabled>Next</button>
+      </div>
+      <div class="question" id="question10">
+        <h2>Last Step</h2>
+        <p>Check if these are working fine</p>
+        <ul>
+          <li>
+            <button onclick="turnLightsOnOff()">
+              Check if the lights are installed properly
+            </button>
+          </li>
+          <li><button onclick="turnMotorOnOff()">Check the pump</button></li>
+        </ul>
+        <button onclick="finish()">Done</button>
+      </div>
+    </div>
+    <script type="text/javascript" src="./setup.js"></script>
+  </body>
 </html>
