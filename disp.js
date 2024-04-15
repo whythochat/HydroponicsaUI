@@ -383,7 +383,7 @@ function GetAndShow() {
       console.error('Error fetching data:', error);
     });
   console.log("Fetched config")
-  fetch('./info.json')
+  fetch('info.json')
     .then(response => response.json())
     .then(data => {
       gauge1.set(data.ETc);
@@ -392,9 +392,8 @@ function GetAndShow() {
       gauge4.set(data.TDS);
       gauge5.set(data.pH);
       gauge6.set(data.CO2);
-      fm.setPercentage(data.wl);
+      fm.setPercentage(data.WP);
       setPc(data.P);
-      impUpdates();
       // Update gauge value boxes
       document.getElementById('temp-value').innerText = data.ETc;
       document.getElementById('tds-value').innerText = data.TDS;
@@ -423,4 +422,4 @@ button.addEventListener('click', restoresys);
 
 GetAndShow();
 
-setInterval(GetAndShow, 1000);
+setInterval(GetAndShow, 500);
