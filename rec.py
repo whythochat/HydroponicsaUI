@@ -1,4 +1,3 @@
-'''
 import serial
 import json
 
@@ -19,35 +18,4 @@ while True:
     with open('info.json', 'w') as f:
         json.dump(line, f)
         f.flush()
-'''
 
-import serial
-import time
-
-# Configure the serial port
-serial_port = '/dev/ttyS0'  # Change this to match your UART port
-baud_rate = 9600  # Change this to match your baud rate
-
-# Open the serial port
-ser = serial.Serial(serial_port, baud_rate)
-
-# Open a file for writing
-output_file = open('info.json', 'w')  
-
-try:
-    while True:
-        # Check if there is data available to read
-        if ser.in_waiting > 0:
-            # Read data from the UART port
-            data = ser.read(ser.in_waiting).decode().strip()
-            
-            # Write the data to the file
-            output_file.write(data)
-            output_file.flush()  # Flush the buffer to ensure data is written immediately
-        else:
-            # Wait for a short time before checking again
-            time.sleep(0.5)  # Adjust the sleep duration as needed
-finally:
-    # Close the serial port and file when done
-    ser.close()
-    output_file.close()
