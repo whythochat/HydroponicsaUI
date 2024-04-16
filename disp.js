@@ -462,6 +462,12 @@ function GetAndShow() {
       else{
         showItems("co2-warn")
       }
+      if(data.WP > 15){
+        hideItems("wp-warn")
+      }
+      else{
+        showItems("wp-warn")
+      }
     })
     .catch(error => {
       console.error('Error fetching data:', error);
