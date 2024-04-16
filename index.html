@@ -16,9 +16,10 @@
   </head>
   <body>
     <div class="font-mono text-3xl">
-      <h1 class="font-serif text-center">
+      <h1 class="font-mono text-center">
         <span class=" text-left" id="daycount"></span> Dashboard</h1>
     </div>
+    <div class="grid grid-rows-3 h-screen m-0">
     <div class="grid justify-items-center grid-cols-3 w-full m-0">
       <div class="flex-initial">
         <canvas height="100" width="150" id="temp"></canvas>
@@ -35,6 +36,9 @@
         <span id="hum-value" class="display"></span>
         <h2 class="text-center font-mono text">Humidity</h2>
       </div>
+      </div>
+      
+    <div class="grid justify-items-center grid-cols-3 w-full m-0">
       <div class="flex-initial">
         <canvas height="100" width="150" id="wt"></canvas>
         <span id="wt-value" class="display"></span>
@@ -52,22 +56,35 @@
       </div>
     </div>
     <div class="grid items-center justify-items-center grid-cols-3 w-full">
-      <div class="w-1/3">
+      <div>
         <div id="fluid-meter"></div>
       </div>
-      <div class="w-1/3">
-        <p class="font-mono text-center">
+      <div>
+        <p class="font-mono text-xl text-center">
           Power Consumption: <br><span class="text-3xl" id="pc"></span>
         </p>
       </div>
-      <div class="w-1/3">
-        <h1 class="font-mono ml-14">Update</h1>
+      <div>
+        <h1 class="font-mono text-xl ml-14">Update</h1>
+        <div class="scrollable-section">
+          <ul class="font-mono text-sm text-wrap">
+            <li class="warning-labels" data-category="low-water">Water is low!</li>
+            <li class="warning-labels" data-category="high-temp">Temperature is not optimal!</li>
+            <li class="warning-labels" data-category="tds-alert">TDS is not good!</li>
+            <li class="warning-labels" data-category="hum-warning">Humidity is not optimal!</li>
+            <li class="warning-labels" data-category="water-temp-warn">The water's temperature is not good for the plant!</li>
+            <li class="warning-labels" data-category="ph-warn">pH is not optimal!</li>
+            <li class="warning-labels" data-category="co2-warn">CO<sub>2</sub> is abnormal!</li>
+          </ul>
+        </div>
+        
         <button
           class="bg-red-600 ml-[2.75rem] hover:bg-red-700 text-white py-2 px-4 rounded text-center bottom-0 right-0" id="myButton">
           Reset
         </button>
       </div>
     </div>
+  </div>
     <script src="./js-fluid-meter.js"></script>
     <script src="./gauge.min.js"></script>
     <script src="./disp.js"></script>

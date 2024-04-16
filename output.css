@@ -582,10 +582,6 @@ video {
   position: fixed;
 }
 
-.absolute {
-  position: absolute;
-}
-
 .bottom-0 {
   bottom: 0px;
 }
@@ -598,32 +594,8 @@ video {
   margin: 0px;
 }
 
-.-ml-10 {
-  margin-left: -2.5rem;
-}
-
-.ml-0 {
-  margin-left: 0px;
-}
-
-.ml-10 {
-  margin-left: 2.5rem;
-}
-
-.ml-56 {
-  margin-left: 14rem;
-}
-
 .ml-14 {
   margin-left: 3.5rem;
-}
-
-.-ml-10 {
-  margin-left: -2.5rem;
-}
-
-.ml-7 {
-  margin-left: 1.75rem;
 }
 
 .ml-\[2\.75rem\] {
@@ -640,6 +612,10 @@ video {
 
 .contents {
   display: contents;
+}
+
+.h-screen {
+  height: 100vh;
 }
 
 .w-1\/3 {
@@ -662,12 +638,24 @@ video {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.grid-rows-2 {
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.grid-rows-3 {
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+}
+
 .items-center {
   align-items: center;
 }
 
 .justify-items-center {
   justify-items: center;
+}
+
+.text-wrap {
+  text-wrap: wrap;
 }
 
 .rounded {
@@ -705,13 +693,19 @@ video {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-.font-serif {
-  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-}
-
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .text-white {
@@ -734,7 +728,68 @@ video {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
+*{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header{
+  width: 100%;
+}
+
+.warning-labels{
+  display: none;
+}
+
+.display{
+  margin-left: 55px;
+  padding: 0px;
+  width: 25%;
+  vertical-align: middle;
+  text-align: center;
+  box-sizing: border-box;
+  display: inline-block;
+  /* max-width: 463px; */
+  font-weight: bold;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.wrapper {
+  background-color: #2d4e5a;
+  height: 200px;
+  width: 200px;
+  position: relative;
+}
+
+.scrollable-section {
+  height: 200px;
+  /* Set the desired height of the scrollable section */
+  width: 100%;
+  overflow-y: auto;
+  /* Enable vertical scrollbar when content overflows */
+}
+
+/* Optional styling for list items */
+
+.scrollable-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.scrollable-section li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  /* Optional: Add a border between list items */
+}
+
+/* Optional hover effect */
+
+.scrollable-section li:hover {
+  background-color: #f0f0f0;
+}
+
 .hover\:bg-red-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(185 28 28 / var(--tw-bg-opacity));
 }
+  

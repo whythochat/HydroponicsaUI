@@ -9,6 +9,10 @@ header{
     width: 100%;
 }
 
+.warning-labels{
+    display: none;
+}
+
 .display{
     margin-left: 55px;
     padding: 0px;
@@ -30,3 +34,26 @@ header{
     width: 200px;
     position: relative;
   }
+
+  .scrollable-section {
+    height: 200px; /* Set the desired height of the scrollable section */
+    width: 100%;
+    overflow-y: auto; /* Enable vertical scrollbar when content overflows */
+  }
+  
+  /* Optional styling for list items */
+  .scrollable-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .scrollable-section li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc; /* Optional: Add a border between list items */
+  }
+  
+  /* Optional hover effect */
+  .scrollable-section li:hover {
+    background-color: #f0f0f0;
+  }
+  
