@@ -401,6 +401,57 @@ function GetAndShow() {
       document.getElementById('wt-value').innerText = data.WTc;
       document.getElementById('ph-value').innerText = data.pH;
       document.getElementById('co2-value').innerText = data.CO2;
+<<<<<<< HEAD
+=======
+      //Environment Temp
+      if(data.ETc >= 20 && data.ETc <= 32){
+        hideItems("high-temp")
+      }
+      else{
+        showItems("high-temp")
+      }
+      //TDS
+      if(data.TDS >= 350 && data.TDS <= 600){
+        hideItems("tds-alert")
+      }
+      else{
+        showItems("tds-alert")
+      }
+      //Humidity
+      if(data.H >= 50 && data.H <= 90){
+        hideItems("hum-warning")
+      }
+      else{
+        showItems("hum-warning")
+      }
+      //Water Temp
+      if(data.WTc >= 18 && data.WTc <= 28){
+        hideItems("water-temp-warn")
+      }
+      else{
+        showItems("water-temp-warn")
+      }
+      //pH
+      if(data.pH >= 5.5 && data.pH <= 6.5){
+        hideItems("ph-warn")
+      }
+      else{
+        showItems("ph-warn")
+      }
+      //CO2
+      if(data.CO2 >= 500 && data.CO2 <= 1500){
+        hideItems("co2-warn")
+      }
+      else{
+        showItems("co2-warn")
+      }
+      if(data.WP > 15){
+        hideItems("wp-warn")
+      }
+      else{
+        showItems("wp-warn")
+      }
+>>>>>>> b6a9b8b9a226bf5fbabf07a58015bab242a9e7e8
     })
     .catch(error => {
       console.error('Error fetching data:', error);
