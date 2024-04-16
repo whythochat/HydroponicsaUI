@@ -405,11 +405,11 @@ function GetAndShow() {
     .catch(error => {
       console.error('Error fetching data:', error);
     });
-    window.electronAPI.writeserial([3,
-      {
-        "status": 0
+  window.electronAPI.writeserial([3,
+    {
+      "status": 0
     }
-    ]);
+  ]);
 }
 
 function restoresys() {
