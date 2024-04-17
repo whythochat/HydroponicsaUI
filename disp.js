@@ -344,6 +344,25 @@ fm.init({
   }
 });
 
+function showItems(category) {
+  console.log("SHOW")
+  const items = document.querySelectorAll('.warning-labels');
+  items.forEach(item => {
+    if (item.dataset.category === category) {
+      item.style.display = 'block';
+    }
+  });
+}
+function hideItems(category) {
+  console.log("HIDE")
+  const items = document.querySelectorAll('.warning-labels');
+  items.forEach(item => {
+    if (item.dataset.category === category) {
+      item.style.display = 'none';
+    }
+  });
+}
+
 function setFlow(value) {
   document.getElementById('wf').innerHTML = value + " ml/s";
 }
@@ -401,8 +420,6 @@ function GetAndShow() {
       document.getElementById('wt-value').innerText = data.WTc;
       document.getElementById('ph-value').innerText = data.pH;
       document.getElementById('co2-value').innerText = data.CO2;
-<<<<<<< HEAD
-=======
       //Environment Temp
       if(data.ETc >= 20 && data.ETc <= 32){
         hideItems("high-temp")
@@ -451,7 +468,6 @@ function GetAndShow() {
       else{
         showItems("wp-warn")
       }
->>>>>>> b6a9b8b9a226bf5fbabf07a58015bab242a9e7e8
     })
     .catch(error => {
       console.error('Error fetching data:', error);
