@@ -59,7 +59,7 @@
           <div data-value="/" class="key2">/</div>
           <div data-value="-1" class="key2">⌫</div>
         </div>
-        <button class="back-button" onclick="previousQuestion()">back</button>
+        <button class="back-button" onclick="previousQuestion()">Back</button>
         <button class="btn" onclick="nextQuestion()">Next</button>
       </div>
       <div class="question" id="question4">
@@ -80,7 +80,7 @@
             id="natural"
             value="natural" /><label for="natural">Natural</label><br />
         </form>
-        <button class="back-button" onclick="previousQuestion()">back</button>
+        <button class="back-button" onclick="previousQuestion()">Back</button>
         <button
           class="btn"
           onclick="    
@@ -106,7 +106,7 @@
           <label for="timeto">To</label
           ><input type="time" id="timeto" step="3600" /><br />
         </form>
-        <button class="back-button" onclick="previousQuestion()">back</button>
+        <button class="back-button" onclick="previousQuestion()">Back</button>
         <button class="btn" onclick="nextQuestion()">Next</button>
       </div>
       <div class="question" id="question6">
@@ -161,51 +161,37 @@
           </ul>
         </form>
         <button class="back-button" onclick="previous_Question()">back</button>
-        <button
-          id="reqb"
-          class="btn"
-          onclick="nextQuestion(); updateph(); submitForm(); "
-          disabled>
-          Start
-        </button>
+        <!--button id="reqb" class="btn" onclick="nextQuestion(); updateph(); submitForm(); " disabled>Start</button-->
+        <button id="reqb" class="btn" onclick="nextQuestion(); updatetds(); showTdsValue(); submitForm(); " disabled>Start</button>
       </div>
       <div class="question" id="question7">
-        <h2>Calibration</h2>
-        <p>Calibrating pH wait a moment</p>
-        <div id="phval">5.5</div>
-        <div id="loading-icon" class="loader"></div>
-        <div id="tick-mark">&#10004;</div>
-        <button class="back-button" onclick="previousQuestion()">back</button>
-        <button
-          id="phch"
-          class="btn"
-          onclick="nextQuestion(); updatetds(); showTdsValue()"
-          disabled>
-          Next
-        </button>
-      </div>
-      <div class="question" id="question8">
         <h2>Calibration</h2>
         <p>
           The TDS value (ideally, this should be between 60 and 100 ppm before
           adding the solutions)
         </p>
         <div id="tdsval">60</div>
-        <button class="back-button" onclick="previous_Question()">back</button>
         <button
           class="btn"
           onclick="nextQuestion(); tdschk(); startTdsCalibration()">
           Next
         </button>
       </div>
-      <div class="question" id="question9">
+      <div class="question" id="question8">
         <h2>Calibration</h2>
         <p>Calibrating TDS wait a moment</p>
         <div id="tdsval2">350 ppm</div>
         <div id="loading-icon2" class="loader"></div>
         <div id="tick-mark2">&#10004;</div>
-        <button class="back-button" onclick="previousQuestion()">back</button>
-        <button class="btn" onclick="nextQuestion()" disabled>Next</button>
+        <button class="btn" onclick="nextQuestion(); updateph(); startPhCalibration();" disabled>Next</button>
+      </div>
+      <div class="question" id="question9">
+        <h2>Calibration</h2>
+        <p>Calibrating pH wait a moment</p>
+        <div id="phval">5.5</div>
+        <div id="loading-icon" class="loader"></div>
+        <div id="tick-mark">&#10004;</div>
+        <button id="phch" class="btn" onclick="nextQuestion()" disabled>Next</button>
       </div>
       <div class="question" id="question10">
         <h2>Last Step</h2>

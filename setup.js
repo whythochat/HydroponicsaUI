@@ -245,7 +245,6 @@ function submitForm() {
       "m_time": [parseInt(pumpHour1, 10), parseInt(pumpHour2, 10)]
     }
   ]);
-  setTimeout(startPhCalibration, 500);
 }
 
 function finish() {
