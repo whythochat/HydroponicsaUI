@@ -161,8 +161,7 @@
           </ul>
         </form>
         <button class="back-button" onclick="previous_Question()">back</button>
-        <!--button id="reqb" class="btn" onclick="nextQuestion(); updateph(); submitForm(); " disabled>Start</button-->
-        <button id="reqb" class="btn" onclick="nextQuestion(); updatetds(); showTdsValue(); submitForm(); " disabled>Start</button>
+        <button id="reqb" class="btn" onclick="nextQuestion(); submitForm(); updatetds();" disabled>Start</button>
       </div>
       <div class="question" id="question7">
         <h2>Calibration</h2>
@@ -183,7 +182,7 @@
         <div id="tdsval2">350 ppm</div>
         <div id="loading-icon2" class="loader"></div>
         <div id="tick-mark2">&#10004;</div>
-        <button class="btn" onclick="nextQuestion(); updateph(); startPhCalibration();" disabled>Next</button>
+        <button id="tdsch" class="btn" onclick="updateph(); startPhCalibration(); nextQuestion(); " disabled>Next</button>
       </div>
       <div class="question" id="question9">
         <h2>Calibration</h2>

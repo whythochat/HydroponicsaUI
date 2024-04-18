@@ -7,10 +7,17 @@ const date = new Date()
 
 const filePath = './setup.json';
 
-const pythonprocess = spawnrec('python', ['rec.py']);
-pythonprocess.stdout.on('data', (data) => {
-  console.log('From python: ' + data)
-})
+function startReceiving(){
+  const pythonprocess = spawnrec('python', ['rec.py']);
+  pythonprocess.stdout.on('data', (data) => {
+    console.log('From python: ' + data)
+  });
+  pythonprocess.on('close', (code) => {
+    startReceiving();
+  });
+}
+
+startReceiving();
 
 function writeJSONToFile(filePath, choice) {
   var jsonData;
@@ -62,6 +69,8 @@ const createWindow = () => {
       pyprocess.kill()
     }, 1000)
   });
+
+
 
 
   fs.readFile('./setup.json', 'utf8', (err, data) => {

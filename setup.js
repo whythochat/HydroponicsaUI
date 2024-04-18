@@ -245,6 +245,7 @@ function submitForm() {
       "m_time": [parseInt(pumpHour1, 10), parseInt(pumpHour2, 10)]
     }
   ]);
+  setTimeout(showTdsValue, 1000)
 }
 
 function finish() {
