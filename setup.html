@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Setup Form</title>
     <link rel="stylesheet" href="./setup.css" />
+    <style>
+      /* Dark mode styles */
+      body.dark-mode {
+        background-color: #1a1a1a;
+        color: #ffffff;
+      }
+      .dark-mode .key,
+      .dark-mode .key2,
+      .dark-mode .key3 {
+        color: #ffffff; /* Set number color to white in dark mode */
+      }
+      /* Toggle switch styles */
+    </style>
   </head>
   <body>
     <div class="carousel">
@@ -161,7 +174,13 @@
           </ul>
         </form>
         <button class="back-button" onclick="previous_Question()">back</button>
-        <button id="reqb" class="btn" onclick="nextQuestion(); submitForm(); updatetds();" disabled>Start</button>
+        <button
+          id="reqb"
+          class="btn"
+          onclick="nextQuestion(); submitForm(); updatetds();"
+          disabled>
+          Start
+        </button>
       </div>
       <div class="question" id="question7">
         <h2>Calibration</h2>
@@ -182,7 +201,13 @@
         <div id="tdsval2">350 ppm</div>
         <div id="loading-icon2" class="loader"></div>
         <div id="tick-mark2">&#10004;</div>
-        <button id="tdsch" class="btn" onclick="updateph(); startPhCalibration(); nextQuestion(); " disabled>Next</button>
+        <button
+          id="tdsch"
+          class="btn"
+          onclick="updateph(); startPhCalibration(); nextQuestion(); "
+          disabled>
+          Next
+        </button>
       </div>
       <div class="question" id="question9">
         <h2>Calibration</h2>
@@ -190,7 +215,9 @@
         <div id="phval">5.5</div>
         <div id="loading-icon" class="loader"></div>
         <div id="tick-mark">&#10004;</div>
-        <button id="phch" class="btn" onclick="nextQuestion()" disabled>Next</button>
+        <button id="phch" class="btn" onclick="nextQuestion()" disabled>
+          Next
+        </button>
       </div>
       <div class="question" id="question10">
         <h2>Last Step</h2>
@@ -206,6 +233,22 @@
         <button onclick="finish()">Done</button>
       </div>
     </div>
+    <label class="toggle-container">
+      <input
+        type="checkbox"
+        id="darkModeCheckbox"
+        class="toggle-checkbox"
+        onchange="toggleDarkMode()" />
+      <span class="toggle-slider"></span>
+    </label>
+
     <script type="text/javascript" src="./setup.js"></script>
+    <script>
+      function toggleDarkMode() {
+        var body = document.body;
+        var darkModeCheckbox = document.getElementById("darkModeCheckbox");
+        body.classList.toggle("dark-mode", darkModeCheckbox.checked);
+      }
+    </script>
   </body>
 </html>
