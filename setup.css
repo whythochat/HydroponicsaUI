@@ -8,6 +8,10 @@ body {
     min-height: 100vh;
   }
 
+  *{
+    cursor:none;
+  }
+
   .input-box {
     display: inline-block;
     border: 1px solid #ccc;
