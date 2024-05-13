@@ -195,7 +195,7 @@ function tdschk() {
 function startPhCalibration() {
   window.electronAPI.writeserial([3,
     {
-      "status": 2
+      "status": 4
     }
   ]);
 }
@@ -211,7 +211,7 @@ function turnLightsOnOff() {
 function showTdsValue() {
   window.electronAPI.writeserial([3,
     {
-      "status": 3
+      "status": 2
     }
   ]);
 }
@@ -219,7 +219,7 @@ function showTdsValue() {
 function startTdsCalibration() {
   window.electronAPI.writeserial([3,
     {
-      "status": 4
+      "status": 3
     }
   ]);
 }
